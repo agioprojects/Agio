@@ -94,7 +94,7 @@ bool Currency::generateGenesisBlock() {
   //std::string hex_tx_represent = Common::toHex(txb);
 
   // Hard code coinbase tx in genesis block, because through generating tx use random, but genesis should be always the same
-  std::string genesisCoinbaseTxHex = "010a01ff0001808084fea6dee11102ead3ba95c5f61ee9027e3bd7a4f6922bea255100affb4453631f79399c8a64822101eae2789e6bf8347f4b9c362dcaab996cd0bcb1d8f7de2583a9b77a89df5c2aed";
+  std::string genesisCoinbaseTxHex = "010a01ff0001808084fea6dee111022b8a0f1aec5a972fa413878dfc9a520ed21d6186328a1e8befb1b297e017928e21014b652202a52b2d8f34ca143d5eefc65fe731efc8c8577fd430691cf1768ecf04";
   BinaryArray minerTxBlob;
 
   bool r =
