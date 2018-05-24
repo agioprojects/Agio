@@ -8,6 +8,7 @@ set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are
 set(CMAKE_SKIP_INSTALL_RULES OFF)
 set(CMAKE_SKIP_PACKAGE_ALL_DEPENDENCY ON)
 set(CMAKE_SUPPRESS_REGENERATION ON)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(DO_TESTS ON CACHE STRING "Spend time making tests? Defaults to ON")
 set(STATIC ON CACHE BOOL "Link libraries statically")
 
@@ -168,6 +169,11 @@ else()
   endif()
 endif()
 
+ find_package(RocksDB)
+ if(ROCKSDB_FOUND)
+    include_directories(SYSTEM ${ROCKSDB_INCLUDE_DIRS})
+endif()
+
 add_subdirectory(external)
 add_subdirectory(src)
 
@@ -176,7 +182,7 @@ if(DO_TESTS)
 endif()
 
 ## We need to setup the RocksDB build environment to match our system
-if(NOT MSVC)
+if(NOT ROCKSDB_FOUND AND NOT MSVC)
   execute_process(
     COMMAND cmake ${CMAKE_CURRENT_SOURCE_DIR}/external/rocksdb -DWITH_GFLAGS=0 -B${PROJECT_BINARY_DIR}/rocksdb
   )
